@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, ThinkingLevel } from "@google/genai";
 import { env } from "../env";
 import { prisma } from "../db/client";
 import { predict } from "./predictionService";
@@ -83,7 +83,10 @@ export async function askGemini(discordId: string, pergunta: string): Promise<st
     config: {
       systemInstruction: SYSTEM_INSTRUCTION,
       temperature: 0.5,
-      maxOutputTokens: 600,
+      maxOutputTokens: 1024,
+      // Gemini 3.x sempre "pensa"; o nível minimal reduz o gasto de tokens
+      // (que conta no maxOutputTokens e estava cortando a resposta).
+      thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
     },
   });
 
