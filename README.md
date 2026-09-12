@@ -89,14 +89,12 @@ npm run build      # checagem de tipos / build de produção
 2. Faça o deploy deste repositório (GitHub) no mesmo projeto.
 3. Configure as variáveis `DISCORD_TOKEN`, `DISCORD_CLIENT_ID` e `GEMINI_API_KEY`.
    - `DATABASE_URL`: referencie a do plugin Postgres (`${{Postgres.DATABASE_URL}}`).
-4. O [railway.json](./railway.json) já define build (`npm ci && npm run build`) e start (`npm start`).
-5. Rode uma vez o schema no banco de produção (local, apontando para a URL pública do Railway):
+4. O [railway.json](./railway.json) define build (`npm run build`) e start (`npm run start:prod`).
+   O Nixpacks roda `npm ci` (com devDependencies) na fase de install.
+5. No start, o bot executa `prisma migrate deploy` automaticamente — as tabelas são criadas/atualizadas a cada deploy.
+6. Rode `npm run register` uma vez (local, com `DISCORD_TOKEN` e `DISCORD_CLIENT_ID`) para publicar os slash commands.
 
-   ```bash
-   $env:DATABASE_URL="<DATABASE_URL_publica_do_railway>"; npm run db:push
-   ```
-
-> Em produção, prefira migrações versionadas (`prisma migrate`) em vez de `db push`.
+> Novas alterações de schema: crie a migração localmente com `npx prisma migrate dev --name <nome>`, commite `prisma/migrations/` e faça push — o deploy aplica sozinho.
 
 ## 📁 Estrutura
 
