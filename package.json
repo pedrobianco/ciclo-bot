@@ -1,0 +1,35 @@
+{
+  "name": "bot-controle-menstrual",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bot de Discord para controle de ciclo menstrual com Gemini",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:prod": "prisma migrate deploy && node dist/index.js",
+    "register": "tsx src/registerCommands.ts",
+    "test": "vitest run",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "migrate:deploy": "prisma migrate deploy",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@google/genai": "^2.22.0",
+    "@prisma/client": "^6.19.3",
+    "discord.js": "^14.27.0",
+    "dotenv": "^17.4.2",
+    "prisma": "^6.19.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.0"
+  }
+}
