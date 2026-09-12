@@ -4,7 +4,7 @@ import { prisma } from "../db/client";
 import { predict } from "./predictionService";
 import { diffInDays, formatBR } from "../utils/dates";
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = env.geminiModel;
 
 const SYSTEM_INSTRUCTION = `Você é a Luna, assistente de um bot de acompanhamento do ciclo menstrual no Discord.
 Fale em português do Brasil, de forma acolhedora, respeitosa e objetiva.

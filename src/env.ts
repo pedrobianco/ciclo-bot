@@ -12,6 +12,8 @@ export const env = {
   discordToken: required("DISCORD_TOKEN"),
   discordClientId: required("DISCORD_CLIENT_ID"),
   geminiApiKey: required("GEMINI_API_KEY"),
+  /** Modelo do Gemini (pode ser trocado sem alterar o código) */
+  geminiModel: process.env.GEMINI_MODEL ?? "gemini-3.6-flash",
   databaseUrl: required("DATABASE_URL"),
   /** Opcional: registra comandos só nesse servidor (propagação instantânea, ideal p/ dev) */
   discordGuildId: process.env.DISCORD_GUILD_ID,
