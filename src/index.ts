@@ -2,11 +2,17 @@ import { Client, Events, GatewayIntentBits, MessageFlags } from "discord.js";
 import { env } from "./env";
 import { commands } from "./commands";
 import { prisma } from "./db/client";
+import { syncCommands } from "./services/commandSync";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once(Events.ClientReady, (readyClient) => {
+client.once(Events.ClientReady, async (readyClient) => {
   console.log(`🌙 Logado como ${readyClient.user.tag}`);
+  try {
+    await syncCommands(readyClient);
+  } catch (err) {
+    console.error("⚠️ Falha ao registrar comandos automaticamente:", err);
+  }
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {

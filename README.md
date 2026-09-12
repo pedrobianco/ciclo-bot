@@ -69,12 +69,13 @@ Preencha:
 | `GEMINI_API_KEY` | Chave da API do Gemini |
 | `DATABASE_URL` | String de conexão do PostgreSQL |
 
-### 6. Registrar os comandos e rodar
+### 6. Rodar
 
 ```bash
-npm run register   # registra os slash commands
 npm run dev        # inicia o bot em modo watch
 ```
+
+O bot **registra os slash commands automaticamente** ao iniciar. (Opcional: `npm run register` faz o mesmo sem subir o bot, útil para forçar o registro.)
 
 ## 🧪 Testes
 
@@ -92,7 +93,7 @@ npm run build      # checagem de tipos / build de produção
 4. O [railway.json](./railway.json) define build (`npm run build`) e start (`npm run start:prod`).
    O Nixpacks roda `npm ci` (com devDependencies) na fase de install.
 5. No start, o bot executa `prisma migrate deploy` automaticamente — as tabelas são criadas/atualizadas a cada deploy.
-6. Rode `npm run register` uma vez (local, com `DISCORD_TOKEN` e `DISCORD_CLIENT_ID`) para publicar os slash commands.
+6. Os slash commands são registrados automaticamente quando o bot inicia. Deixe `DISCORD_GUILD_ID` definido para registro instantâneo no seu servidor; sem ele o registro é global (até ~1h para propagar).
 
 > Novas alterações de schema: crie a migração localmente com `npx prisma migrate dev --name <nome>`, commite `prisma/migrations/` e faça push — o deploy aplica sozinho.
 
